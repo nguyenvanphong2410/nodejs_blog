@@ -1,14 +1,12 @@
 const express = require('express')
+const morgan = require('morgan')
 const app = express()
 const port = 3000
 
-app.get('/tintuc', (req, res) => {
+app.use(morgan('combined'))
 
-    var a = 1;
-    var b = 2;
-    var c = a + b;
-
-    res.send('Hello World!')
+app.get('/tin2', (req, res) => {
+    res.send('Hello World 2!')
 })
 
 app.listen(port, () => {
