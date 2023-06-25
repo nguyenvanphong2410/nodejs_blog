@@ -28,7 +28,6 @@ app.get('/news', (req, res) => {
 
 //search
 app.get('/search', (req, res) => {
-    console.log(req.query)
     res.render('search');
 })
 
