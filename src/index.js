@@ -11,20 +11,20 @@ const route = require('./routes');
 app.use(express.static(path.join(__dirname, 'public')));
 
 //middleware
-app.use(
+        app.use(
     express.urlencoded({
         extended: true,
-    }),
+      }),
 );
 
-app.use(express.json());
+            app.use(express.json());
 
 //Template engine
-app.engine(
+    app.engine(
     'hbs',
     engine({
         extname: '.hbs',
-    }),
+                }),
 );
 
 app.set('view engine', 'hbs');
