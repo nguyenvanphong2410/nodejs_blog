@@ -25,20 +25,18 @@
     "url": "https://github.com/nguyenvanphong2410/nodejs_blog.git\u001b[D\u001b[C/issues"
   },
   "homepage": "https://github.com/nguyenvanphong2410/nodejs_blog.git\u001b[D\u001b[C#readme",
-
   "lint-staged": {
     "src/**/*.{js,json,scss}": "prettier --single-quote --trailing-comma all  --tab-width 4 --write"
   },
-
-  "husky":{
+  "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
   },
-
   "dependencies": {
     "express": "^4.18.2",
-    "express-handlebars": "^7.0.7"
+    "express-handlebars": "^7.0.7",
+    "mongoose": "^7.3.1"
   },
   "devDependencies": {
     "husky": "^8.0.3",
