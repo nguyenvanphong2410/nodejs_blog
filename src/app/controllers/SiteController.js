@@ -1,21 +1,19 @@
 const Course = require('../models/Course');
+const { mutipleMongooseToObject } = require('../../ultil/mongoose')
 
 class SiteController {
+
     // [GET] /news
-    index(req, res) {
+    index(req, res, next) {
 
-        // Course.findOne({}, function (err, courses) {
-        //     if (!err) res.json(courses);
-        //     res.status(400).json({ error: 'ERROR' });
-        // })
-
-        // Từ phiên bản mới v7 thì Mn nhớ thay thế tránh bị lỗi, 
-        //do find không còn hỗ trợ callback(chỉ còn promise và async/await) nhé. 
-        //*Với Promise Course.find({}) .then(courses => res.json(courses)) .catch(err => res.status(400).json({ error: 'ERROR' }));
         Course.find({})
-            .then(courses => res.json(courses))
-            .catch(err => res.status(400).json({ error: 'ERROR' }));
-        // res.render('home');
+            .then(courses => {
+                res.render('home', {
+                    // Handlerbar phiên bản mới nên phải viết như bên dưới
+                    courses: mutipleMongooseToObject(courses)
+                })
+            })
+            .catch(next);
     }
 
     //[GET] /news/:slug
