@@ -2,12 +2,13 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const { engine } = require('express-handlebars');
+const methodOverride = require('method-override');
 const app = express();
 const port = 3000;
 
 const route = require('./routes');
 
-const db =  require('./config/db');
+const db = require('./config/db');
 //connect to DB
 db.connect();
 
@@ -23,11 +24,19 @@ app.use(
 
 app.use(express.json());
 
+//Dùng để sử dụng phương thức khác
+// override with POST having ?_method=DELETE
+app.use(methodOverride('_method'))
+
 //Template engine
 app.engine(
     'hbs',
     engine({
         extname: '.hbs',
+        helpers: {
+            // Dòng này xử lí số thứ tự của danh sách khóa học của tôi
+            sum: (a, b) => a + b,
+        }
     }),
 );
 
