@@ -16,7 +16,7 @@
             <option value=" ">---Hành động---</option>
             <option value="delete">Xóa</option>
         </select>
-        <button class="btn btn-primary btn-sm ml-4 check-all-submit-btn disabled">T/hiện</button>
+        <button class="btn btn-primary btn-sm ml-4 check-all-submit-btn" disabled>T/hiện</button>
 
     </div>
 
@@ -93,6 +93,9 @@
         var courseId;
         var deleteForm = document.forms['delete-course-form'];
         var containerForm = document.forms['container-form'];
+
+        var containerForm = $('form[name="container-form"]');
+
         var btnDeleteCourses = document.getElementById('btn-delete-course');
         var checkboxAll = $('#checkbox-all');
         var courseItemCheckbox = $('input[name="courseIds[]"]');
@@ -128,22 +131,13 @@
         });
 
 
-
-        //Kiểm tra chọn 1 option nào 
-        checkAllSubmitBtn.on('submit', function (e) {
-            var isSubmitable = !$(this).hasClass('disabled');
-            if (!isSubmitable) {
-                e.preventDefault();
-            }
-        });
-
         //Re-render checkAll
         function renderCheckAllSubmitBtn() {
             var checkedCount = $('input[name="courseIds[]"]:checked').length;
             if (checkedCount > 0) {
-                checkAllSubmitBtn.removeClass('disabled');
+                checkAllSubmitBtn.attr('disabled', false);
             } else {
-                checkAllSubmitBtn.addClass('disabled');
+                checkAllSubmitBtn.attr('disabled', true);
             }
         }
 
