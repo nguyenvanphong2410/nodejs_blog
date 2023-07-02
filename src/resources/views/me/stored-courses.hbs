@@ -17,16 +17,27 @@
             <option value="delete">Xóa</option>
         </select>
         <button class="btn btn-primary btn-sm ml-4 check-all-submit-btn" disabled>T/hiện</button>
-
     </div>
+
+    {{_sort}}
 
     <table class="table mt-4">
         <thead>
             <tr>
                 <th scope="col" colspan="2">#</th>
-                <th scope="col">Tên khóa học</th>
-                <th scope="col">Trình độ</th>
-                <th scope="col" colspan="2">Thời gian tạo</th>
+                <th scope="col">
+                    Tên khóa học
+                    {{{sortable 'name' _sort}}}
+                   
+                </th>
+                <th scope="col">
+                    Trình độ 
+                    {{{sortable 'level' _sort}}}
+                </th>
+                <th scope="col" colspan="2">
+                    Thời gian tạo
+                    {{{sortable 'createdAt' _sort}}}
+                    </th>
             </tr>
         </thead>
         <tbody>

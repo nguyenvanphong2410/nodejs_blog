@@ -6,6 +6,9 @@ const methodOverride = require('method-override');
 const app = express();
 const port = 3000;
 
+// Lấy vào Phần mềm trung gian
+const SortMiddleware = require('./app/middlewares/SortMiddleware')
+
 const route = require('./routes');
 
 const db = require('./config/db');
@@ -28,6 +31,9 @@ app.use(express.json());
 // override with POST having ?_method=DELETE
 app.use(methodOverride('_method'))
 
+//Custom middlewares
+app.use(SortMiddleware);
+
 //Template engine
 app.engine(
     'hbs',
@@ -36,6 +42,28 @@ app.engine(
         helpers: {
             // Dòng này xử lí số thứ tự của danh sách khóa học của tôi
             sum: (a, b) => a + b,
+            sortable: (field, sort) => {
+                const sortType = field === sort.column ? sort.type : 'default';
+
+                const icons = {
+                    default: 'oi oi-elevator',
+                    desc: 'oi oi-sort-descending',
+                    asc: 'oi oi-sort-ascending',
+                }
+
+                const types = {
+                    default: 'desc',
+                    asc: 'desc',
+                    desc: 'asc'
+                }
+
+                const icon = icons[sortType];
+                const type = types[sortType];
+
+                return ` <a href="?_sort&column=${field}&type=${type}">
+                <span class="${icon}"></span>
+            </a>`
+            }
         }
     }),
 );
